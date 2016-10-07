@@ -1,0 +1,31 @@
+{
+  "name": "cordova-plugin-rduksecurity",
+  "version": "0.0.1",
+  "description": "Cordova Security Plugin",
+  "cordova": {
+    "id": "cordova-plugin-rduksecurity",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rduk/cordova-plugin-rduksecurity"
+  },
+  "keywords": [
+    "cordova",
+    "security",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests"
+  },
+  "author": "Kim UNG",
+  "license": "MIT",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  }
+}
