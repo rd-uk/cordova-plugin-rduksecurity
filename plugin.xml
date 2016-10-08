@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	id="com.rduk.cordova.security"
-	version="0.0.1">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.rduk.cordova.security"
+    version="0.0.1">
       
     <name>RDUK - Security Cordova Plugin</name>
-	<description>RDUK - Security Cordova/PhoneGap plugin</description>
-	<author>RDUK - Kim UNG</author>
-	<license>MIT</license>
-	<keywords>rduk,security</keywords>
+    <description>RDUK - Security Cordova/PhoneGap plugin</description>
+    <author>RDUK - Kim UNG</author>
+    <license>MIT</license>
+    <keywords>rduk,security</keywords>
     <repo>https://github.com/rduk/cordova-plugin-rduksecurity.git</repo>
     <issue>https://github.com/rduk/cordova-plugin-rduksecurity/issues</issue>
 
     <js-module src="www/security.js" name="security">
         <clobbers target="security" />
     </js-module>
-	
+
     <!-- android -->
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/*">>
