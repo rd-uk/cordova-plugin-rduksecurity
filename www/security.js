@@ -16,21 +16,29 @@
 var argscheck = require('cordova/argscheck')
   , exec = require('cordova/exec');
 
-var securityExport = {};
-
-securityExport.generate = function(alias, successCallback, errorCallback) {
-    argscheck.checkArgs('SFF', 'security.generate', arguments);
+var generateCertificate = function(alias, successCallback, errorCallback) {
+    argscheck.checkArgs('SFF', 'security.certificate.generate', arguments);
     exec(successCallback, errorCallback, "Security", "generate", [alias]);
 };
 
-securityExport.getSignature = function(textToSign, alias, successCallback, errorCallback) {
-    argscheck.checkArgs('SSFF', 'security.getSignature', arguments);
+var signMessage = function(textToSign, alias, successCallback, errorCallback) {
+    argscheck.checkArgs('SSFF', 'security.message.sign', arguments);
     exec(successCallback, errorCallback, "Security", "getSignature", [textToSign, alias]);
 };
 
-securityExport.verifySignature = function(message, signature, alias, successCallback, errorCallback) {
-    argscheck.checkArgs('SSSFF', 'security.verifySignature', arguments);
+var verifyMessage = function(message, signature, alias, successCallback, errorCallback) {
+    argscheck.checkArgs('SSSFF', 'security.message.verify', arguments);
     exec(successCallback, errorCallback, "Security", "verifySignature", [message, signature, alias]);
+};
+
+var securityExport = {
+    certificate: {
+        generate: generateCertificate
+    },
+    message: {
+        sign: signMessage,
+        verify: verifyMessage
+    }
 };
 
 module.exports = securityExport;
