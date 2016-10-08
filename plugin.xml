@@ -6,7 +6,7 @@
 	version="0.0.1">
       
     <name>RDUK - Security Cordova Plugin</name>
-	<description>RDUK - Security Cordova/PhoneGap pluginy</description>
+	<description>RDUK - Security Cordova/PhoneGap plugin</description>
 	<author>RDUK - Kim UNG</author>
 	<license>MIT</license>
 	<keywords>rduk,security</keywords>

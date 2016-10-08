@@ -23,11 +23,11 @@
  */
 package com.rduk.security.util;
 
-import java.util.Calendar;
-import java.math.BigInteger;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.util.Calendar;
 
-import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
@@ -42,18 +42,13 @@ import java.security.KeyStoreException;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
 import java.security.UnrecoverableEntryException;
-import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.spec.RSAKeyGenParameterSpec;
 
 import javax.security.auth.x500.X500Principal;
 
-//import android.security.keystore.KeyProperties;
-//import android.security.keystore.KeyGenParameterSpec;
-import android.security.KeyPairGeneratorSpec;
-import android.util.Base64;
-
 import android.content.Context;
+import android.security.KeyPairGeneratorSpec;
 
 public class Signing
 {
@@ -66,6 +61,15 @@ public class Signing
         return ks;
     }
 
+    private static byte[] digest(String message)
+        throws NoSuchAlgorithmException, UnsupportedEncodingException
+    {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(message.getBytes("UTF-8"));
+        
+        return md.digest();
+    }
+
     public static byte[] sign(String message, String keyStoreAlias)
         throws KeyStoreException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException, SignatureException, CertificateException, UnrecoverableEntryException, NoSuchProviderException
     {
@@ -73,12 +77,9 @@ public class Signing
 
         PrivateKey pk = (PrivateKey) ks.getKey(keyStoreAlias, null);
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(message.getBytes("UTF-8"));
-
         Signature s = Signature.getInstance("SHA256withRSA");
         s.initSign(pk);
-        s.update(md.digest());
+        s.update(Signing.digest(message));
 
         return s.sign();
     }
@@ -93,7 +94,7 @@ public class Signing
 
         Signature s = Signature.getInstance("SHA256withRSA");
         s.initVerify(ks.getCertificate(keyStoreAlias));
-        s.update(md.digest());
+        s.update(Signing.digest(message));
 
         return s.verify(signature);
     }
