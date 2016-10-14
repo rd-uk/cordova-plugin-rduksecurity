@@ -34,6 +34,7 @@ import android.content.Context;
 import android.util.Log;
 import android.util.Base64;
 
+import com.rduk.security.util.Digest;
 import com.rduk.security.util.Signing;
 
 public class Security extends CordovaPlugin {
@@ -67,6 +68,9 @@ public class Security extends CordovaPlugin {
         }
         else if (action.equals("verifySignature")) {
             this.verifySignature(args, callbackContext);
+        }
+        else if (action.equals("sha256digest")) {
+            this.sha256digest(args, callbackContext);
         }
         else {
             callbackContext.error("Rduk Security Exception: unknown action '" + action + "'!");
@@ -115,6 +119,19 @@ public class Security extends CordovaPlugin {
                 boolean valid = Signing.verify(message, Base64.decode(signature, Base64.NO_WRAP), alias);
 
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, valid));
+            }
+        }, args, callbackContext);
+    }
+
+    private void sha256digest(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        this.threadHelper(new SecurityOp() {
+            public void run(JSONArray args) throws Exception {
+                String message = args.getString(0);
+
+                callbackContext.sendPluginResult(
+                    new PluginResult(
+                        PluginResult.Status.OK,
+                        Base64.encodeToString(Digest.sha256digest(message), Base64.NO_WRAP)));
             }
         }, args, callbackContext);
     }

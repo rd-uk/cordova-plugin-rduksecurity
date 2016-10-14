@@ -10,8 +10,8 @@
     <author>RDUK - Kim UNG</author>
     <license>MIT</license>
     <keywords>rduk,security</keywords>
-    <repo>https://github.com/rduk/cordova-plugin-rduksecurity.git</repo>
-    <issue>https://github.com/rduk/cordova-plugin-rduksecurity/issues</issue>
+    <repo>https://github.com/rd-uk/cordova-plugin-rduksecurity.git</repo>
+    <issue>https://github.com/rd-uk/cordova-plugin-rduksecurity/issues</issue>
 
     <js-module src="www/security.js" name="security">
         <clobbers target="security" />
@@ -30,7 +30,20 @@
         
         <source-file src="src/android/Security.java" target-dir="src/com/rduk/security" />
         <source-file src="src/android/util/Signing.java" target-dir="src/com/rduk/security/utils" />
+        <source-file src="src/android/util/Digest.java" target-dir="src/com/rduk/security/utils" />
         
-     </platform>
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+         <config-file target="config.xml" parent="/*">
+             <feature name="Security">
+                 <param name="ios-package" value="Security" />
+             </feature>
+        </config-file>
+
+        <header-file src="src/ios/Security.h" />
+        <source-file src="src/ios/Security.m" />
+    </platform>
 
 </plugin>
