@@ -55,16 +55,18 @@ security.certificate.generate('alias...', onSuccess, onError);
 <a name="module_security.digest.sha256digest"></a>
 #### security.digest.sha256digest(message, successCallback, errorCallback)
 
+Generates a hash value of message with sha256 algorithm, passed to the success callback.
+
 ```js
 var onSuccess = function(data) {
-    /* ... */
+    console.log(data); // will output: qoNyp5fmrKx26h69RVjP/H4TtPQtxGXTWlDC/MRiCjo=
 };
 
 var onError = function(message) {
-    /* ... */
+    /* Oops, something goes wrong... */
 };
 
-security.digest.sha256digest('my message', onSuccess, onError);
+security.digest.sha256digest('rduk', onSuccess, onError);
 ```
 
 <a name="module_security.message"></a>
