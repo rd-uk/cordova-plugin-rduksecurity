@@ -1,7 +1,7 @@
 # RDUK - Security Cordova Plugin
 
 ## Supported OS
-* Android
+* Android _(api level __18+__)_
 
 ## Installation
 
@@ -17,6 +17,8 @@ cordova plugin add https://github.com/rd-uk/cordova-plugin-rduksecurity.git
     * [.certificate](#module_security.certificate)
         * [.generate(name, successCallback, errorCallback)](#module_security.certificate.generate)
     * [.digest](#module_security.digest)
+        * [.md5digest(message, successCallback, errorCallback)](#module_security.digest.md5digest)    
+        * [.sha1digest(message, successCallback, errorCallback)](#module_security.digest.sha1digest)    
         * [.sha256digest(message, successCallback, errorCallback)](#module_security.digest.sha256digest)    
     * [.message](#module_security.message)
         * [.sign(messageToSign, keyAlias, successCallback, errorCallback)](#module_security.message.sign)    
@@ -52,10 +54,44 @@ security.certificate.generate('alias...', onSuccess, onError);
 <a name="module_security.digest"></a>
 ### security.digest
 
+<a name="module_security.digest.md5digest"></a>
+#### security.digest.md5digest(message, successCallback, errorCallback)
+
+Generates a MD5 hash of message, passed to the success callback as Base64-encoded `String`.
+
+```js
+var onSuccess = function(data) {
+    console.log(data); // will output: uVkG1pQIp3QD8df1FdvMBw==
+};
+
+var onError = function(message) {
+    /* Oops, something goes wrong... */
+};
+
+security.digest.md5digest('rduk', onSuccess, onError);
+```
+
+<a name="module_security.digest.sha1digest"></a>
+#### security.digest.sha1digest(message, successCallback, errorCallback)
+
+Generates a SHA-1 hash of message, passed to the success callback as Base64-encoded `String`.
+
+```js
+var onSuccess = function(data) {
+    console.log(data); // will output: xhZASyUDRjjsAZVzRKp16OpERK0=
+};
+
+var onError = function(message) {
+    /* Oops, something goes wrong... */
+};
+
+security.digest.sha1digest('rduk', onSuccess, onError);
+```
+
 <a name="module_security.digest.sha256digest"></a>
 #### security.digest.sha256digest(message, successCallback, errorCallback)
 
-Generates a hash value of message with sha256 algorithm, passed to the success callback.
+Generates a SHA-256 hash of message, passed to the success callback as Base64-encoded `String`.
 
 ```js
 var onSuccess = function(data) {

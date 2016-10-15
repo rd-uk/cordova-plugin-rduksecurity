@@ -69,6 +69,12 @@ public class Security extends CordovaPlugin {
         else if (action.equals("verifySignature")) {
             this.verifySignature(args, callbackContext);
         }
+        else if (action.equals("md5digest")) {
+            this.md5digest(args, callbackContext);
+        }
+        else if (action.equals("sha1digest")) {
+            this.sha1digest(args, callbackContext);
+        }
         else if (action.equals("sha256digest")) {
             this.sha256digest(args, callbackContext);
         }
@@ -123,6 +129,32 @@ public class Security extends CordovaPlugin {
         }, args, callbackContext);
     }
 
+    private void md5digest(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        this.threadHelper(new SecurityOp() {
+            public void run(JSONArray args) throws Exception {
+                String message = args.getString(0);
+
+                callbackContext.sendPluginResult(
+                    new PluginResult(
+                        PluginResult.Status.OK,
+                        Base64.encodeToString(Digest.digest(message, Digest.Algorithm.MD5), Base64.NO_WRAP)));
+            }
+        }, args, callbackContext);
+    }
+
+    private void sha1digest(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        this.threadHelper(new SecurityOp() {
+            public void run(JSONArray args) throws Exception {
+                String message = args.getString(0);
+
+                callbackContext.sendPluginResult(
+                    new PluginResult(
+                        PluginResult.Status.OK,
+                        Base64.encodeToString(Digest.digest(message, Digest.Algorithm.SHA1), Base64.NO_WRAP)));
+            }
+        }, args, callbackContext);
+    }
+
     private void sha256digest(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         this.threadHelper(new SecurityOp() {
             public void run(JSONArray args) throws Exception {
@@ -131,7 +163,7 @@ public class Security extends CordovaPlugin {
                 callbackContext.sendPluginResult(
                     new PluginResult(
                         PluginResult.Status.OK,
-                        Base64.encodeToString(Digest.sha256digest(message), Base64.NO_WRAP)));
+                        Base64.encodeToString(Digest.digest(message, Digest.Algorithm.SHA256), Base64.NO_WRAP)));
             }
         }, args, callbackContext);
     }

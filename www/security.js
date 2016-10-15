@@ -39,6 +39,16 @@ var verifyMessage = function(message, signature, alias, successCallback, errorCa
     exec(successCallback, errorCallback, "Security", "verifySignature", [message, signature, alias]);
 };
 
+var md5digest = function(message, successCallback, errorCallback) {
+    argscheck.checkArgs('SFF', 'security.digest.md5digest', arguments);
+    exec(successCallback, errorCallback, "Security", "md5digest", [message]);
+};
+
+var sha1digest = function(message, successCallback, errorCallback) {
+    argscheck.checkArgs('SFF', 'security.digest.sha1digest', arguments);
+    exec(successCallback, errorCallback, "Security", "sha1digest", [message]);
+};
+
 var sha256digest = function(message, successCallback, errorCallback) {
     argscheck.checkArgs('SFF', 'security.digest.sha256digest', arguments);
     exec(successCallback, errorCallback, "Security", "sha256digest", [message]);
@@ -53,6 +63,8 @@ var securityExport = {
         verify: verifyMessage
     },
     digest: {
+        md5digest: md5digest,
+        sha1digest: sha1digest,
         sha256digest: sha256digest
     }
 };

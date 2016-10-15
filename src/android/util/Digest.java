@@ -29,10 +29,27 @@ import java.security.NoSuchAlgorithmException;
 
 public class Digest
 {
-    public static byte[] sha256digest(String message)
+    public enum Algorithm
+    {
+        MD5 ("MD5"),
+        SHA1 ("SHA-1"),
+        SHA256 ("SHA-256");
+
+        private String name = "";
+
+        Algorithm(String name){
+            this.name = name;
+        }
+
+        public String toString(){
+            return this.name;
+        }
+    }
+
+    public static byte[] digest(String message, Algorithm algorithm)
         throws NoSuchAlgorithmException, UnsupportedEncodingException
     {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        MessageDigest md = MessageDigest.getInstance(algorithm.toString());
         md.update(message.getBytes("UTF-8"));
         
         return md.digest();
