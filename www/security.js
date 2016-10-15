@@ -13,8 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-var argscheck = require('cordova/argscheck')
-  , exec = require('cordova/exec');
+var argscheck = require('cordova/argscheck'), 
+    exec = require('cordova/exec');
 
 var generateCertificate = function(alias, successCallback, errorCallback) {
     argscheck.checkArgs('SFF', 'security.certificate.generate', arguments);
