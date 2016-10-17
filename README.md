@@ -1,7 +1,7 @@
 # RDUK - Security Cordova Plugin
 
 ## Supported OS
-* Android _(api level __18+__)_
+* Android _(api level **18+**)_
 
 ## Installation
 
